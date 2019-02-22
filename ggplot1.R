@@ -99,4 +99,4 @@ ggplot(interviews_plotting, aes(x = no_membrs, fill=village))+
   geom_density(alpha=0.4)
 
 ggplot(interviews_plotting, aes(x = no_membrs, fill=village, color=village))+
-  geom_density(alpha=0)
+  geom_density(alpha=0.1)
