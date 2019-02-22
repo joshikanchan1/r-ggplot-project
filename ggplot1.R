@@ -1,0 +1,43 @@
+library('tidyverse')
+getwd()
+dir()
+
+interviews_plotting <- read_csv("data_output/interviews_plotting.csv")
+
+ggplot(data = interviews_plotting)
+
+ggplot(data = interviews_plotting,
+       aes(x = no_membrs, y = number_items)) +
+       geom_point()
+       
+interviews_plot +
+       geom_line()
+   
+interviews_plot +
+  geom_point()    
+
+interviews_plot +
+  geom_bar()
+   
+ggplot(data = interviews_plotting,
+       aes(x = no_membrs, y = number_items)) +
+       geom_point(alpha = 0.5)
+
+ggplot(data = interviews_plotting,
+       aes(x = no_membrs, y = number_items)) +
+       geom_jitter(alpha = 0.5)
+
+interviews_plot <- ggplot(data = interviews_plotting, aes(x=no_membrs, y=number-items))
+       geom_jitter(alpha=0.5, width = 0.15, height = 0.15)
+
+ggsave("fig_output/membrs_item.png", interviews_plot, width = 15, height = 10, 
+       dpi = 72)
+
+ggplot(data=interviews_plotting, aes(x=no_membrs, y=number_items)) +
+  geom_jitter(alpha=0.5, width=0.2, height = 0.2, size=4)+
+  
+ggplot(data=interviews_plotting, aes(x=no_membrs, y=number_items)) +
+  geom_jitter(aes(color=village), alpha=0.5, width=0.2, height = 0.2, size=4)+
+  geom_smooth(method = "lm")
+
+
