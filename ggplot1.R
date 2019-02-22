@@ -100,3 +100,8 @@ ggplot(interviews_plotting, aes(x = no_membrs, fill=village))+
 
 ggplot(interviews_plotting, aes(x = no_membrs, fill=village, color=village))+
   geom_density(alpha=0.1)
+
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, fill = village)) +
+       geom_bar()
+
