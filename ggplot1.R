@@ -204,6 +204,10 @@ ggplot(data = interviews_plotting,
   geom_text(aes(label = stat(count), y = 5.5,
             position = position_dodge(), colour = "white"))
 
+counts <- data.frame(table(interviews_plotting$respondent_wall_type, 
+                           interviews_plotting$memb_assoc, useNA = "ifany"))
+
+name(counts) <- c("wall_type", "memb_assoc", "Freq")
 
 #Violin plots
 
@@ -213,12 +217,98 @@ ggplot(data = interviews_plotting,
   geom_jitter(alpha=0.5, width=0.2, height=0.2, colour = "tomato")
 
 #violin plots per village by wall type and no of rooms
+
 ggplot(data = interviews_plotting,
   aes(x = respondent_wall_type, y = rooms, colour = village)) +
   geom_violin(alpha=0) +
   geom_jitter(alpha=0.5, width=0.2, height=0.2, colour = "tomato")
 
+#contour plot
 
-counts <- data.frame(table(interviews_plotting$respondent_wall_type, 
-                           interviews_plotting$memb_assoc, useNA = "ifany"))
-name(counts) <- c("wall_type", "memb_assoc", "Freq")
+str(interviews_plotting)
+
+ggplot(data = interviews_plotting,
+  aes(x = no_membrs, y = years_liv, z =liv_count)) +
+  geom_contour()
+
+ggplot(data = interviews_plotting, aes(fill=respondent_wall_type, x=village)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  ylab("Proportion") + xlab("village")
+
+ggplot(data = interviews_plotting, aes(fill=respondent_wall_type, x=village)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  ylab("Proportion") + xlab("village") + 
+  ggtitle("Proportion of wall type by village")
+
+#combined bar
+
+ggplot(data = interviews_plotting, aes(fill=respondent_wall_type, x=village)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  labs(x "village", y ="Proportion", title="Wall type by village")
+
+#legend_walltype
+
+ggplot(data = interviews_plotting, aes(fill=respondent_wall_type, x=village)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  labs(x "village", y ="Proportion", title="Wall type by village") +
+  guides(fill=guide_legend(title = "Wall type"))
+
+#inserting heading with command scale_fill_discrete
+
+ggplot(data = interviews_plotting, aes(fill=respondent_wall_type, x=village)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  labs(x "village", y ="Proportion", title="Wall type by village") +
+  scale_fill_discrete(labels=("burnt brick", "cement", "mud daub", "sun bricks")) +
+  guides(fill=guide_legend(title="Wall type"))
+
+#using memb_assoc
+#facet for columns and rows, 
+#add lable in x-graph
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2)
+
+
+#add lable in x-graph - text in x-bar
+
+labels = c("", "") 
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme(axis.text.x = element_text(angle=45))
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme_bw()+
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+
+V <- ggplot(faithfuld, aes(waiting, eruptions, z = density))
+V <- 
