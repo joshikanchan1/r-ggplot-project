@@ -160,3 +160,37 @@ ggplot(data = interviews_plotting,
   geom_boxplot(alpha = 0) +
   geom_jitter(alpha=0.5, width = 0.2, height = 0.2, 
               aes(colour = village))
+
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, fill = village)) +
+  geom_bar(position = "dodge") + 
+  facet_wrap(~respondent_wall_type, y=liv_count)) + 
+  geom_jitter(alpha=0.5, width = 0.2, height = 0.2, 
+              aes(colour = village))
+
+#rooms vs respondent_wall_type by member of irrgn assc
+
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, fill = village)) +
+  geom_bar(position = "dodge") + 
+  facet_wrap(~respondent_wall_type, y=liv_count)) + 
+  geom_jitter(alpha=0.5, width = 0.2, height = 0.2, 
+              aes(colour = memb_assoc))
+
+#bar_graph
+ggplot(data = interviews_plotting,
+  aes(x = respondent_wall_type, fill = village)) +
+  geom_bar(position = "dodge") + 
+  facet_wrap(~respondent_wall_type) + 
+  scale_fill_brewer(palette = "RdBu") 
+
+#detailed boxplot
+ggplot(data = interviews_plotting,
+  aes(x = respondent_wall_type, y=liv_count, fill = memb_assoc, 
+      colour = memb_assoc)) +
+  geom_boxplot(alpha = 0.5) +
+  geom_point(alpha=0.5, 
+             position = position_jitterdodge(jitter.width = 0.1, 
+                                             jitter.height = 0.1)) 
+  
+
