@@ -301,6 +301,8 @@ ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type))
   labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
   theme(axis.text.x = element_text(angle=45, hjust = 1))
 
+# changing themes
+
 ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
   geom_bar(position = "fill") +
   stat_count(geom = "text", aes(label=stat(count)), 
@@ -310,5 +312,58 @@ ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type))
   theme_bw()+
   theme(axis.text.x = element_text(angle=45, hjust = 1))
 
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme_classic()+
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+
+#Changing font size
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme_classic() +
+  ggtitle("Plot title") +
+  guides(fill=guide_legend(title="Member\nAssociation")) +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10), 
+       plot.title = element_text(hjust=0.5))
+
+my_theme <- theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10) +
+                    plot.title = element(hjust=0.5))
+
+
+ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type)) +
+  geom_bar(position = "fill") +
+  stat_count(geom = "text", aes(label=stat(count)), 
+             position=position_fill(vjust=0.5), colour="white") +
+  scale_x_discrete(labels= c("burnt brick", "cement", "mud daub", "sun bricks")) +
+  scale_y_continuous(breaks=c(0, 0.5, 1)) +
+  labs(x = "Wall type", y ="Proportion") + facet_wrap(~village, nrow=2) +
+  theme_classic() +
+  ggtitle("Plot title") +
+  guides(fill=guide_legend(title="Member\nAssociation")) +
+  theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10), 
+       plot.title = element_text(hjust=0.5))
+
+
+
 V <- ggplot(faithfuld, aes(waiting, eruptions, z = density))
 V <- 
+  
