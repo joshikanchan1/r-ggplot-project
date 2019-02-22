@@ -113,7 +113,7 @@ ggplot(data = interviews_plotting,
        aes(x = village, fill = village)) +
        geom_bar(position = "dodge") + facet_wrap(~ respondent_wall_type) +
        theme_bw()
-
+#graphs per village_bar graph
 counts = table(interviews_plotting$village, interviews_plotting$respondent_wall_type)
 counts = data.frame(counts)
 colnames(counts) = c("village", "wall_type", "Freq")
@@ -121,9 +121,42 @@ colnames(counts) = c("village", "wall_type", "Freq")
 ggplot(counts,aes(x=wall_type, y=Freq,fill=village))+
   geom_col(position = "dodge")
 
-ggplot(interviews_plotting, aes(x = respondent_wall_type, fill = village))+
+ggplot(interviews_plotting, 
+       aes(x = respondent_wall_type, fill = village))+
   geom_bar(position = "fill")+
   ylab("proportion") +
   stat_count(geom = "text", 
              aes(label = stat(count)),
-             position = "fill", colour = "white")
+             position = position_fill(vjust = 0.5), colour = "white")
+
+ggplot(interviews_plotting, 
+       aes(x = village, fill = respondent_wall_type))+
+  geom_bar(position = "fill")+
+  ylab("proportion") +
+  stat_count(geom = "text", 
+             aes(label = stat(count)),
+             position = position_fill(vjust = 0.5), colour = "white")
+
+#boxplots
+
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, y = rooms)) +
+  geom_boxplot() +
+  geom_jitter(alpha=0.5, width = 0.2, height = 0.2, colour = "tomato")
+
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, y = rooms, fill = village)) +
+  geom_boxplot() +
+  geom_jitter(alpha=0.5, width = 0.2, height = 0.2, colour = "tomato")
+
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, y = rooms, fill = village)) +
+  geom_boxplot() +
+  geom_jitter(alpha=0.5, width = 0.2, height = 0.2, colour = "tomato")
+
+#village wise box plot by wall_type and room numbers
+ggplot(data = interviews_plotting,
+       aes(x = respondent_wall_type, y = rooms)) +
+  geom_boxplot(alpha = 0) +
+  geom_jitter(alpha=0.5, width = 0.2, height = 0.2, 
+              aes(colour = village))
