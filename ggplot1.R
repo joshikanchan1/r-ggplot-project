@@ -362,6 +362,23 @@ ggplot(data = interviews_plotting, aes(fill=memb_assoc, x=respondent_wall_type))
   theme(axis.text.x = element_text(angle=45, hjust = 1, size = 10), 
        plot.title = element_text(hjust=0.5))
 
+interviews_plotting
+
+
+colnames(interviews_plotting)
+         
+ggplot(interviews_plotting, aes(no_membrs, liv_count)) +
+  geom_point()
+       
+ggplot(interviews_plotting, aes(no_membrs, liv_count)) +
+  geom_count()
+       
+ggplot(interviews_plotting, aes(x = number_month_lack_food, y = no_membrs)) +
+  geom_count(aes(size = stat(prop), group = 1)) +
+  scale_size_area(max_size = 10)
+
+ggplot(interviews_plotting, aes(x = number_month_lack_food))+
+  geom_histogram()
 
 
 V <- ggplot(faithfuld, aes(waiting, eruptions, z = density))
