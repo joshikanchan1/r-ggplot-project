@@ -193,4 +193,32 @@ ggplot(data = interviews_plotting,
              position = position_jitterdodge(jitter.width = 0.1, 
                                              jitter.height = 0.1)) 
   
+#didn't work
+ggplot(data = interviews_plotting,
+  aes(x = respondent_wall_type, y=liv_count, fill = memb_assoc, 
+      colour = memb_assoc)) +
+  geom_boxplot(alpha = 0.5) +
+  geom_point(alpha=0.5, 
+             position = position_jitterdodge(jitter.width = 0.1, 
+                                             jitter.height = 0.1)) +
+  geom_text(aes(label = stat(count), y = 5.5,
+            position = position_dodge(), colour = "white"))
 
+
+#Violin plots
+
+ggplot(data = interviews_plotting,
+  aes(x = respondent_wall_type, y = rooms)) +
+  geom_violin(alpha=0) +
+  geom_jitter(alpha=0.5, width=0.2, height=0.2, colour = "tomato")
+
+#violin plots per village by wall type and no of rooms
+ggplot(data = interviews_plotting,
+  aes(x = respondent_wall_type, y = rooms, colour = village)) +
+  geom_violin(alpha=0) +
+  geom_jitter(alpha=0.5, width=0.2, height=0.2, colour = "tomato")
+
+
+counts <- data.frame(table(interviews_plotting$respondent_wall_type, 
+                           interviews_plotting$memb_assoc, useNA = "ifany"))
+name(counts) <- c("wall_type", "memb_assoc", "Freq")
