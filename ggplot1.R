@@ -103,5 +103,13 @@ ggplot(interviews_plotting, aes(x = no_membrs, fill=village, color=village))+
 
 ggplot(data = interviews_plotting,
        aes(x = respondent_wall_type, fill = village)) +
-       geom_bar(position = "dodge")
+       geom_bar(position = "dodge") + facet_grid(~ respondent_wall_type)
 
+ggplot(data = interviews_plotting,
+       aes(x = village, fill = village)) +
+       geom_bar(position = "dodge") + facet_wrap(~ respondent_wall_type)
+
+ggplot(data = interviews_plotting,
+       aes(x = village, fill = village)) +
+       geom_bar(position = "dodge") + facet_wrap(~ respondent_wall_type) +
+       theme_bw()
