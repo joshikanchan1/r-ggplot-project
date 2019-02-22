@@ -103,5 +103,5 @@ ggplot(interviews_plotting, aes(x = no_membrs, fill=village, color=village))+
 
 ggplot(data = interviews_plotting,
        aes(x = respondent_wall_type, fill = village)) +
-       geom_bar()
+       geom_bar(position = "dodge")
 
