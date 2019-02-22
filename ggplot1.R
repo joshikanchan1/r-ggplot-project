@@ -113,3 +113,17 @@ ggplot(data = interviews_plotting,
        aes(x = village, fill = village)) +
        geom_bar(position = "dodge") + facet_wrap(~ respondent_wall_type) +
        theme_bw()
+
+counts = table(interviews_plotting$village, interviews_plotting$respondent_wall_type)
+counts = data.frame(counts)
+colnames(counts) = c("village", "wall_type", "Freq")
+
+ggplot(counts,aes(x=wall_type, y=Freq,fill=village))+
+  geom_col(position = "dodge")
+
+ggplot(interviews_plotting, aes(x = respondent_wall_type, fill = village))+
+  geom_bar(position = "fill")+
+  ylab("proportion") +
+  stat_count(geom = "text", 
+             aes(label = stat(count)),
+             position = "fill", colour = "white")
